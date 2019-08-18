@@ -13,6 +13,13 @@
 		F8CD62D823075C8B00326B08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CD62D623075C8B00326B08 /* LaunchScreen.storyboard */; };
 		F8CD62E323075C8B00326B08 /* SpaceXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62E223075C8B00326B08 /* SpaceXTests.swift */; };
 		F8CD62F4230760BB00326B08 /* LaunchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62F3230760BB00326B08 /* LaunchListViewModel.swift */; };
+		F8CD62F7230764F000326B08 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62F6230764F000326B08 /* Utilities.swift */; };
+		F8CD62FA2307656A00326B08 /* LaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62F92307656A00326B08 /* LaunchManager.swift */; };
+		F8CD62FD230765B400326B08 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62FC230765B400326B08 /* Environment.swift */; };
+		F8CD62FF2307679C00326B08 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62FE2307679C00326B08 /* Launch.swift */; };
+		F8CD63012307AED300326B08 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD63002307AED300326B08 /* Rocket.swift */; };
+		F8CD63042307B8E800326B08 /* LaunchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD63032307B8E800326B08 /* LaunchHeader.swift */; };
+		F8CD63072308478800326B08 /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD63062308478800326B08 /* LaunchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,13 @@
 		F8CD62E223075C8B00326B08 /* SpaceXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXTests.swift; sourceTree = "<group>"; };
 		F8CD62E423075C8B00326B08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8CD62F3230760BB00326B08 /* LaunchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewModel.swift; sourceTree = "<group>"; };
+		F8CD62F6230764F000326B08 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F8CD62F92307656A00326B08 /* LaunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchManager.swift; sourceTree = "<group>"; };
+		F8CD62FC230765B400326B08 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F8CD62FE2307679C00326B08 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		F8CD63002307AED300326B08 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
+		F8CD63032307B8E800326B08 /* LaunchHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchHeader.swift; sourceTree = "<group>"; };
+		F8CD63062308478800326B08 /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +122,8 @@
 		F8CD62EE23075F3400326B08 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F8CD62FE2307679C00326B08 /* Launch.swift */,
+				F8CD63002307AED300326B08 /* Rocket.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,6 +131,9 @@
 		F8CD62EF23075F3F00326B08 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F8CD62FB2307658A00326B08 /* Constants */,
+				F8CD62F82307655C00326B08 /* Managers */,
+				F8CD62F5230764D400326B08 /* Helpers */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -130,6 +149,7 @@
 		F8CD62F12307609000326B08 /* LaunchViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F8CD63022307B8D600326B08 /* Views */,
 				F8CD62F22307609A00326B08 /* ViewModels */,
 				F8CD62CF23075C8800326B08 /* LaunchTableViewController.swift */,
 			);
@@ -142,6 +162,48 @@
 				F8CD62F3230760BB00326B08 /* LaunchListViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F8CD62F5230764D400326B08 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD62F6230764F000326B08 /* Utilities.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F8CD62F82307655C00326B08 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD62F92307656A00326B08 /* LaunchManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		F8CD62FB2307658A00326B08 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD62FC230765B400326B08 /* Environment.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		F8CD63022307B8D600326B08 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD63052308475B00326B08 /* TableCells */,
+				F8CD63032307B8E800326B08 /* LaunchHeader.swift */,
+			);
+			name = Views;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		F8CD63052308475B00326B08 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD63062308478800326B08 /* LaunchTableViewCell.swift */,
+			);
+			path = TableCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,8 +307,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8CD62F4230760BB00326B08 /* LaunchListViewModel.swift in Sources */,
+				F8CD62FD230765B400326B08 /* Environment.swift in Sources */,
+				F8CD63042307B8E800326B08 /* LaunchHeader.swift in Sources */,
+				F8CD62FA2307656A00326B08 /* LaunchManager.swift in Sources */,
 				F8CD62D023075C8800326B08 /* LaunchTableViewController.swift in Sources */,
+				F8CD62FF2307679C00326B08 /* Launch.swift in Sources */,
+				F8CD63072308478800326B08 /* LaunchTableViewCell.swift in Sources */,
+				F8CD62F7230764F000326B08 /* Utilities.swift in Sources */,
 				F8CD62CE23075C8800326B08 /* AppDelegate.swift in Sources */,
+				F8CD63012307AED300326B08 /* Rocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
