@@ -28,7 +28,7 @@ extension AppDelegate {
   /// Root view controller
   ///
   fileprivate var launchTableViewController: LaunchTableViewController {
-    let tableViewController = LaunchTableViewController(viewModel: nil)
+    let tableViewController = LaunchTableViewController()
     return tableViewController
   }
 }
