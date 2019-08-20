@@ -32,6 +32,7 @@ class LaunchTableViewController: UITableViewController {
     self.navigationItem.title = "Upcoming Launches"
     self.tableView.rowHeight = 140.0
     self.tableView.tableFooterView = UIView()
+    self.tableView.separatorStyle = .none
     self.tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: LaunchTableViewCell.identifier)
     
     let frame = CGRect(x: self.tableView.frame.minX, y: self.tableView.frame.minY, width: self.view.frame.width, height: 175)

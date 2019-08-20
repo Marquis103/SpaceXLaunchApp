@@ -12,13 +12,20 @@ class LaunchTableViewCell: UITableViewCell {
   static let identifier = "launchTableViewCell"
   
   // MARK: - TableView Cell subviews
+  fileprivate lazy var containerView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  //fileprivate var clipping
   fileprivate lazy var missionName: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
     label.textColor = UIColor.headerColor
     label.lineBreakMode = .byWordWrapping
-    label.font = UIFont.systemFont(ofSize: 18.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
     return label
   }()
   
@@ -35,7 +42,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = UIColor.headerColor
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
     return label
   }()
   
@@ -51,7 +58,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = UIColor.headerColor
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
     return label
   }()
   
@@ -59,13 +66,21 @@ class LaunchTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.contentView.addSubview(missionName)
-    self.contentView.addSubview(missionIds)
-    self.contentView.addSubview(rocketName)
-    self.contentView.addSubview(reusedPieces)
-    self.contentView.addSubview(missionTime)
+    //setup container
+    self.contentView.addSubview(containerView)
+    containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 4.0).isActive = true
+    containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4.0).isActive = true
+    containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4.0).isActive = true
+    containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -4.0).isActive = true
     
-    let safeAreaLayoutGuide = self.contentView.safeAreaLayoutGuide
+    //add subviews to container
+    self.containerView.addSubview(missionName)
+    self.containerView.addSubview(missionIds)
+    self.containerView.addSubview(rocketName)
+    self.containerView.addSubview(reusedPieces)
+    self.containerView.addSubview(missionTime)
+    
+    let safeAreaLayoutGuide = self.containerView.safeAreaLayoutGuide
     
     // layout mission name
     missionName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
@@ -92,6 +107,19 @@ class LaunchTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  //MARK: - View Methods
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    containerView.layer.cornerRadius = 10
+    //containerView.layer.shadowOpacity = 1
+    //containerView.layer.shadowRadius = 2
+    //containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
+    containerView.layer.masksToBounds = false
+    //containerView.layer.shadowColor = UIColor.darkGray.cgColor
+    containerView.layer.borderColor = UIColor.red.cgColor
+    containerView.layer.borderWidth = 1.0
+  }
   override func prepareForReuse() {
     super.prepareForReuse()
     
