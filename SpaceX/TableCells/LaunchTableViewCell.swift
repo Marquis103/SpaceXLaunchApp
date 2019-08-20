@@ -16,6 +16,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
+    label.textColor = UIColor.headerColor
     label.lineBreakMode = .byWordWrapping
     label.font = UIFont.systemFont(ofSize: 18.0, weight: .medium)
     return label
@@ -25,6 +26,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
+    label.textColor = UIColor.headerColor
     label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     return label
   }()
@@ -32,6 +34,7 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var rocketName: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = UIColor.headerColor
     label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     return label
   }()
@@ -39,6 +42,7 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var reusedPieces: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = UIColor.headerColor
     label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     return label
   }()
@@ -46,6 +50,7 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var missionTime: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = UIColor.headerColor
     label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     return label
   }()
@@ -73,11 +78,11 @@ class LaunchTableViewCell: UITableViewCell {
     rocketName.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     rocketName.topAnchor.constraint(equalTo: missionIds.bottomAnchor, constant: 8.0).isActive = true
     
-    reusedPieces.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
-    reusedPieces.topAnchor.constraint(equalTo: rocketName.bottomAnchor, constant: 8.0).isActive = true
-    
     missionTime.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
     missionTime.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
+    
+    reusedPieces.trailingAnchor.constraint(equalTo: missionTime.trailingAnchor).isActive = true
+    reusedPieces.topAnchor.constraint(equalTo: missionTime.bottomAnchor, constant: 8.0).isActive = true
 
     missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
     missionTime.setContentCompressionResistancePriority(.init(1000), for: .horizontal)

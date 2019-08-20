@@ -29,6 +29,7 @@ class LaunchTableViewController: UITableViewController {
     super.viewDidLoad()
     
     //set up tableview
+    self.navigationItem.title = "Upcoming Launches"
     self.tableView.rowHeight = 140.0
     self.tableView.tableFooterView = UIView()
     self.tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: LaunchTableViewCell.identifier)
