@@ -67,7 +67,7 @@ class LaunchTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.contentView.backgroundColor = .groupTableViewBackground
+    self.backgroundColor = .groupTableViewBackground
     
     //setup container
     self.contentView.addSubview(containerView)
@@ -135,7 +135,7 @@ class LaunchTableViewCell: UITableViewCell {
       if let launch = launch {
         missionName.text = launch.missionName
         missionTime.text = DateFormatUtility.shared.dateFormat(forType: .mediumDateFormat).string(from: launch.launchDate)
-        rocketName.text = "🚀 \(launch.rocket.rocketName)"
+        rocketName.text = "\(launch.rocket.rocketName) 🚀"
         missionIds.text = !launch.missionId.isEmpty ? launch.missionId.joined(separator: ",") : nil
         
         let reusedCount = launch.rocket.reusedPiecesCount

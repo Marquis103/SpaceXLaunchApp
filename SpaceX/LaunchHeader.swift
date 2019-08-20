@@ -45,7 +45,7 @@ class LaunchHeader: UIView {
       if let launch = launch {
         configureView()
         runTimer()
-        nextLaunch.text = "🚀 \(launch.rocket.rocketName) for mission \(launch.missionName) launches in ..."
+        nextLaunch.text = "\(launch.missionName) launches the \(launch.rocket.rocketName) in ..."
         launchDate = launch.launchDate
       }
     }
