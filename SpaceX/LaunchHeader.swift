@@ -12,7 +12,7 @@ class LaunchHeader: UIView {
   fileprivate var nextLaunch: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = .white
+    label.textColor = UIColor.spaceBlue
     label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
     return label
   }()
@@ -20,7 +20,7 @@ class LaunchHeader: UIView {
   fileprivate var countDownLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = .white
+    label.textColor = .spaceBlue
     label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
     return label
@@ -57,7 +57,7 @@ class LaunchHeader: UIView {
     self.addSubview(nextLaunch)
     self.addSubview(countDownLabel)
     
-    self.backgroundColor = UIColor.headerColor
+    self.backgroundColor = UIColor.groupTableViewBackground
   }
   
   required init?(coder aDecoder: NSCoder) {

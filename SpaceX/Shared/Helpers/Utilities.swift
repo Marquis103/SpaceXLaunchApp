@@ -6,7 +6,7 @@
 //  Copyright © 2019 thatSwiftGuy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Utilities {
   ///

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-  static var headerColor: UIColor {
+  static var spaceBlue: UIColor {
     return UIColor(red: 0.0/255.0, green: 51.0/255.0, blue: 102.0/255.0, alpha: 1.0)
   }
 }

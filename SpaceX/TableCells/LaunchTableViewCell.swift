@@ -14,6 +14,7 @@ class LaunchTableViewCell: UITableViewCell {
   // MARK: - TableView Cell subviews
   fileprivate lazy var containerView: UIView = {
     let view = UIView()
+    view.backgroundColor = .spaceBlue
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -23,9 +24,9 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
-    label.textColor = UIColor.headerColor
+    label.textColor = UIColor.white
     label.lineBreakMode = .byWordWrapping
-    label.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 22.0, weight: .semibold)
     return label
   }()
   
@@ -33,7 +34,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
-    label.textColor = UIColor.headerColor
+    label.textColor = UIColor.white
     label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     return label
   }()
@@ -41,7 +42,7 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var rocketName: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = UIColor.headerColor
+    label.textColor = UIColor.white
     label.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
     return label
   }()
@@ -49,15 +50,15 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var reusedPieces: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = UIColor.headerColor
-    label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+    label.textColor = UIColor.white
+    label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
     return label
   }()
   
   fileprivate lazy var missionTime: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = UIColor.headerColor
+    label.textColor = UIColor.white
     label.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
     return label
   }()
@@ -68,10 +69,12 @@ class LaunchTableViewCell: UITableViewCell {
     
     //setup container
     self.contentView.addSubview(containerView)
-    containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 4.0).isActive = true
-    containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4.0).isActive = true
-    containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4.0).isActive = true
-    containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -4.0).isActive = true
+    let safeAreaLayoutGuide = self.contentView.safeAreaLayoutGuide
+    
+    containerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
+    containerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 6.0).isActive = true
+    containerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -6.0).isActive = true
+    containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
     
     //add subviews to container
     self.containerView.addSubview(missionName)
@@ -80,11 +83,10 @@ class LaunchTableViewCell: UITableViewCell {
     self.containerView.addSubview(reusedPieces)
     self.containerView.addSubview(missionTime)
     
-    let safeAreaLayoutGuide = self.containerView.safeAreaLayoutGuide
-    
     // layout mission name
-    missionName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
-    missionName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
+    let containerLayoutGuide = self.containerView.safeAreaLayoutGuide
+    missionName.leadingAnchor.constraint(equalTo: containerLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
+    missionName.topAnchor.constraint(equalTo: containerLayoutGuide.topAnchor, constant: 8.0).isActive = true
     missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
     
     missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 8.0).isActive = true
@@ -93,8 +95,8 @@ class LaunchTableViewCell: UITableViewCell {
     rocketName.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     rocketName.topAnchor.constraint(equalTo: missionIds.bottomAnchor, constant: 8.0).isActive = true
     
-    missionTime.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
-    missionTime.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
+    missionTime.topAnchor.constraint(equalTo: containerLayoutGuide.topAnchor, constant: 8.0).isActive = true
+    missionTime.trailingAnchor.constraint(equalTo: containerLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
     
     reusedPieces.trailingAnchor.constraint(equalTo: missionTime.trailingAnchor).isActive = true
     reusedPieces.topAnchor.constraint(equalTo: missionTime.bottomAnchor, constant: 8.0).isActive = true
@@ -112,13 +114,11 @@ class LaunchTableViewCell: UITableViewCell {
     super.layoutSubviews()
     
     containerView.layer.cornerRadius = 10
-    //containerView.layer.shadowOpacity = 1
-    //containerView.layer.shadowRadius = 2
-    //containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
     containerView.layer.masksToBounds = false
-    //containerView.layer.shadowColor = UIColor.darkGray.cgColor
-    containerView.layer.borderColor = UIColor.red.cgColor
-    containerView.layer.borderWidth = 1.0
+    
+    containerView.layer.shadowOpacity = 1
+    containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
+    containerView.layer.shadowColor = UIColor.darkGray.cgColor
   }
   override func prepareForReuse() {
     super.prepareForReuse()
