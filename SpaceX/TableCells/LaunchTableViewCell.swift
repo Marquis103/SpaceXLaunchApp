@@ -46,7 +46,7 @@ class LaunchTableViewCell: UITableViewCell {
   fileprivate lazy var missionTime: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     return label
   }()
   
@@ -67,7 +67,7 @@ class LaunchTableViewCell: UITableViewCell {
     missionName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
     missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
     
-    missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 4.0).isActive = true
+    missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 8.0).isActive = true
     missionIds.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     
     rocketName.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true

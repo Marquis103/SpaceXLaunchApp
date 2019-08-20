@@ -12,36 +12,73 @@ class LaunchHeader: UIView {
   fileprivate var nextLaunch: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  fileprivate var missionName: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = .white
+    label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
     return label
   }()
   
   fileprivate var countDownLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = .white
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
     return label
   }()
   
-  var launch: Launch? {
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    guard let launchDate = launchDate else { return }
+    countDownLabel.text = DateFormatUtility.shared.interval(date: launchDate)
+  }
+  
+  fileprivate var timer = Timer()
+  fileprivate var launchDate: Date? {
     didSet {
-      configureView()
+      setNeedsLayout()
     }
   }
   
+  var launch: Launch? {
+    didSet {
+      if let launch = launch {
+        configureView()
+        runTimer()
+        nextLaunch.text = "🚀 \(launch.missionName) Launches in ..."
+        launchDate = launch.launchDate
+      }
+    }
+  }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
+    self.addSubview(nextLaunch)
+    self.addSubview(countDownLabel)
+    
+    self.backgroundColor = UIColor.headerColor
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   //MARK: - Helper functions
+  func runTimer() {
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+  }
+  
+  @objc func updateTimer() {
+    self.launchDate = launch?.launchDate
+  }
+  
   fileprivate func configureView() {
-    nextLaunch.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -40.0).isActive = true
+    nextLaunch.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20.0).isActive = true
     nextLaunch.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     
     countDownLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    countDownLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-    
-    missionName.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 40.0).isActive = true
-    missionName.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    countDownLabel.topAnchor.constraint(equalTo: nextLaunch.bottomAnchor, constant: 16.0).isActive = true
+    countDownLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
   }
 }

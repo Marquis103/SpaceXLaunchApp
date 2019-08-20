@@ -12,6 +12,8 @@ class LaunchTableViewController: UITableViewController {
   // MARK: - Properties
   var viewModel: LaunchListViewModel
   
+  fileprivate var headerView: LaunchHeader?
+  
   // MARK: - Initializers
   init(viewModel: LaunchListViewModel = LaunchListViewModel()) {
     self.viewModel = viewModel
@@ -27,9 +29,12 @@ class LaunchTableViewController: UITableViewController {
     super.viewDidLoad()
     
     //set up tableview
-    self.tableView.rowHeight = 120.0
+    self.tableView.rowHeight = 140.0
     self.tableView.tableFooterView = UIView()
     self.tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: LaunchTableViewCell.identifier)
+    
+    let frame = CGRect(x: self.tableView.frame.minX, y: self.tableView.frame.minY, width: self.view.frame.width, height: 175)
+    headerView = LaunchHeader(frame: frame)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +56,10 @@ class LaunchTableViewController: UITableViewController {
           self?.tableView.reloadData()
         }
       case .next:
-        break
+        DispatchQueue.main.async {
+          self?.headerView?.launch = launches.first
+          self?.tableView.tableHeaderView = self?.headerView
+        }
       }
     }
   }

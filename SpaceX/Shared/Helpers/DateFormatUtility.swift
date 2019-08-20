@@ -12,6 +12,9 @@ class DateFormatUtility {
   // MARK: - Initializers
   private init() { }
   
+  // default calendar
+  private var calendar = Calendar.current
+  
   static let shared = DateFormatUtility()
   
   // MARK: - DateFormatters
@@ -27,6 +30,20 @@ class DateFormatUtility {
     switch type {
     case .mediumDateFormat: return mediumDateFormatter
     }
+  }
+  
+  ///
+  /// Interval string from launch date to current date
+  /// - Parameters:
+  ///   - date: Future launch date compared to current date
+  /// - Returns:
+  ///   - String: (e.g) 23 days 12:10:54
+  ///
+  func interval(date: Date) -> String {
+    let components = calendar.dateComponents([ .day, .hour, .minute, .second], from: Date(), to: date)
+    let intervalString = String(format: "%02d days %02d:%02d:%02d",
+                              arguments: [components.day ?? 0, components.hour ?? 0, components.minute ?? 0, components.second ?? 0])
+    return intervalString
   }
 }
   

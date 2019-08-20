@@ -12,7 +12,9 @@ class LaunchListViewModel {
   /// Types of launch data
   var nextLaunch: Launch? {
     didSet {
-      resultsDidChange?(.next, launches)
+      if let nextLaunch = nextLaunch {
+        resultsDidChange?(.next, [nextLaunch])
+      }
     }
   }
   
