@@ -29,7 +29,6 @@ class LaunchTableViewController: UITableViewController {
     super.viewDidLoad()
     
     //set up tableview
-    self.tableView.backgroundColor = .groupTableViewBackground
     self.navigationItem.title = "Upcoming Launches"
     self.tableView.rowHeight = 140.0
     self.tableView.tableFooterView = UIView()

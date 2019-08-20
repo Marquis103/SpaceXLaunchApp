@@ -43,7 +43,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = UIColor.white
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
     return label
   }()
   
@@ -51,7 +51,7 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textColor = UIColor.white
-    label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     return label
   }()
   
@@ -66,6 +66,8 @@ class LaunchTableViewCell: UITableViewCell {
   // MARK: - Initializer
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    self.contentView.backgroundColor = .groupTableViewBackground
     
     //setup container
     self.contentView.addSubview(containerView)
@@ -87,22 +89,19 @@ class LaunchTableViewCell: UITableViewCell {
     let containerLayoutGuide = self.containerView.safeAreaLayoutGuide
     missionName.leadingAnchor.constraint(equalTo: containerLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
     missionName.topAnchor.constraint(equalTo: containerLayoutGuide.topAnchor, constant: 8.0).isActive = true
-    missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
+    missionName.trailingAnchor.constraint(equalTo: containerLayoutGuide.trailingAnchor).isActive = true
     
-    missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 8.0).isActive = true
+    missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 4.0).isActive = true
     missionIds.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     
     rocketName.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
-    rocketName.topAnchor.constraint(equalTo: missionIds.bottomAnchor, constant: 8.0).isActive = true
+    rocketName.topAnchor.constraint(equalTo: missionIds.bottomAnchor, constant: 12.0).isActive = true
     
-    missionTime.topAnchor.constraint(equalTo: containerLayoutGuide.topAnchor, constant: 8.0).isActive = true
-    missionTime.trailingAnchor.constraint(equalTo: containerLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
+    missionTime.bottomAnchor.constraint(equalTo: containerLayoutGuide.bottomAnchor, constant: -8.0).isActive = true
+    missionTime.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     
-    reusedPieces.trailingAnchor.constraint(equalTo: missionTime.trailingAnchor).isActive = true
-    reusedPieces.topAnchor.constraint(equalTo: missionTime.bottomAnchor, constant: 8.0).isActive = true
-
-    missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
-    missionTime.setContentCompressionResistancePriority(.init(1000), for: .horizontal)
+    reusedPieces.trailingAnchor.constraint(equalTo: containerLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
+    reusedPieces.bottomAnchor.constraint(equalTo: containerLayoutGuide.bottomAnchor, constant: -8.0).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -136,7 +135,7 @@ class LaunchTableViewCell: UITableViewCell {
       if let launch = launch {
         missionName.text = launch.missionName
         missionTime.text = DateFormatUtility.shared.dateFormat(forType: .mediumDateFormat).string(from: launch.launchDate)
-        rocketName.text = launch.rocket.rocketName
+        rocketName.text = "🚀 \(launch.rocket.rocketName)"
         missionIds.text = !launch.missionId.isEmpty ? launch.missionId.joined(separator: ",") : nil
         
         let reusedCount = launch.rocket.reusedPiecesCount
