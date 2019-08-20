@@ -12,7 +12,7 @@ private struct EnvironmentConstants {
   private init (){}
   
   static var productionScheme     = "https"
-  static var productionAPIHost    = "api.spacexdata.com/v3"
+  static var productionAPIHost    = "api.spacexdata.com"
 }
 
 ///

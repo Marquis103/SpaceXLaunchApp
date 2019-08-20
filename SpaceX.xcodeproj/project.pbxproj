@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F816E40F230BA6EC00EC25DF /* DateFormatUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E40E230BA6EC00EC25DF /* DateFormatUtility.swift */; };
 		F8CD62CE23075C8800326B08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62CD23075C8800326B08 /* AppDelegate.swift */; };
 		F8CD62D023075C8800326B08 /* LaunchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD62CF23075C8800326B08 /* LaunchTableViewController.swift */; };
 		F8CD62D523075C8B00326B08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8CD62D423075C8B00326B08 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F816E40E230BA6EC00EC25DF /* DateFormatUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatUtility.swift; sourceTree = "<group>"; };
 		F8CD62CA23075C8800326B08 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8CD62CD23075C8800326B08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8CD62CF23075C8800326B08 /* LaunchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				F8CD62F6230764F000326B08 /* Utilities.swift */,
+				F816E40E230BA6EC00EC25DF /* DateFormatUtility.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8CD62F4230760BB00326B08 /* LaunchListViewModel.swift in Sources */,
+				F816E40F230BA6EC00EC25DF /* DateFormatUtility.swift in Sources */,
 				F8CD62FD230765B400326B08 /* Environment.swift in Sources */,
 				F8CD63042307B8E800326B08 /* LaunchHeader.swift in Sources */,
 				F8CD62FA2307656A00326B08 /* LaunchManager.swift in Sources */,

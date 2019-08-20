@@ -9,12 +9,15 @@
 import UIKit
 
 class LaunchTableViewCell: UITableViewCell {
-  // MArK: - TableView Cell subviews
-  fileprivate lazy var missionnName: UILabel = {
+  static let identifier = "launchTableViewCell"
+  
+  // MARK: - TableView Cell subviews
+  fileprivate lazy var missionName: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
-    label.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
+    label.lineBreakMode = .byWordWrapping
+    label.font = UIFont.systemFont(ofSize: 18.0, weight: .medium)
     return label
   }()
   
@@ -22,81 +25,90 @@ class LaunchTableViewCell: UITableViewCell {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 2
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+    label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     return label
   }()
   
   fileprivate lazy var rocketName: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     return label
   }()
   
   fileprivate lazy var reusedPieces: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+    label.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     return label
   }()
   
   fileprivate lazy var missionTime: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+    label.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
     return label
   }()
   
-  // MARK: - Properties
-  var launch: Launch? {
-    didSet {
-      configureView()
-    }
-  }
-  
-  ///
-  /// Configure Tableview cell for given launch
-  ///
-  private func configureView() {
-    guard let launch = launch else { return }
+  // MARK: - Initializer
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.contentView.addSubview(missionnName)
-    self.contentView.addSubview(missionTime)
-    self.contentView.addSubview(reusedPieces)
+    self.contentView.addSubview(missionName)
+    self.contentView.addSubview(missionIds)
     self.contentView.addSubview(rocketName)
-    
-    missionnName.text = launch.missionName
-    missionTime.text = "mission time"
-    reusedPieces.text = "♻️ 3 reused cores ♻️"
-    rocketName.text = "rocketname"
+    self.contentView.addSubview(reusedPieces)
+    self.contentView.addSubview(missionTime)
     
     let safeAreaLayoutGuide = self.contentView.safeAreaLayoutGuide
     
     // layout mission name
-    missionnName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-    missionnName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    missionName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8.0).isActive = true
+    missionName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
+    missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
     
-    // date of launch
-    missionTime.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-    missionTime.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+    missionIds.topAnchor.constraint(equalTo: missionName.bottomAnchor, constant: 4.0).isActive = true
+    missionIds.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
     
-    // if mission ids are available add the label
-    if launch.missionId.isEmpty {
-      rocketName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-      rocketName.topAnchor.constraint(equalTo: missionnName.bottomAnchor, constant: 12.0).isActive = true
-    } else {
-      self.contentView.addSubview(missionIds)
-      
-      //set mission= id texts
-      missionIds.text = "\(launch.missionId.split(separator: ","))"
-      
-      missionIds.topAnchor.constraint(equalTo: missionnName.bottomAnchor, constant: 4.0).isActive = true
-      missionIds.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-      rocketName.topAnchor.constraint(equalTo: rocketName.bottomAnchor, constant: 12.0).isActive = true
-      rocketName.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+    rocketName.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
+    rocketName.topAnchor.constraint(equalTo: missionIds.bottomAnchor, constant: 8.0).isActive = true
+    
+    reusedPieces.leadingAnchor.constraint(equalTo: missionName.leadingAnchor).isActive = true
+    reusedPieces.topAnchor.constraint(equalTo: rocketName.bottomAnchor, constant: 8.0).isActive = true
+    
+    missionTime.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8.0).isActive = true
+    missionTime.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8.0).isActive = true
+
+    missionName.trailingAnchor.constraint(lessThanOrEqualTo: missionTime.leadingAnchor).isActive = true
+    missionTime.setContentCompressionResistancePriority(.init(1000), for: .horizontal)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    self.missionIds.text = nil
+    self.missionName.text = nil
+    self.reusedPieces.text = nil
+    self.rocketName.text = nil
+    self.missionTime.text = nil
+  }
+  
+  // MARK: - Properties
+  var launch: Launch? {
+    didSet {
+      if let launch = launch {
+        missionName.text = launch.missionName
+        missionTime.text = DateFormatUtility.shared.dateFormat(forType: .mediumDateFormat).string(from: launch.launchDate)
+        rocketName.text = launch.rocket.rocketName
+        missionIds.text = !launch.missionId.isEmpty ? launch.missionId.joined(separator: ",") : nil
+        
+        let reusedCount = launch.rocket.reusedPiecesCount
+        reusedPieces.text = reusedCount > 0 ? "♻️ \(reusedCount) reused cores" : nil
+      }
     }
-    
-    reusedPieces.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-    reusedPieces.topAnchor.constraint(equalTo: rocketName.bottomAnchor, constant: 4.0).isActive = true
   }
 }

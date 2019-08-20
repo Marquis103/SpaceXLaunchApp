@@ -34,7 +34,7 @@ class LaunchManager {
     urlComponents = environment.apiURLComponents
     switch launchType {
     case .upcoming:
-      urlComponents?.path = "\(path)/upcoming"
+      urlComponents?.path = "/v3/\(path)/upcoming"
       urlComponents?.queryItems = []
       
       let queryItemLimit = URLQueryItem(name: "limit", value: String(limit))
@@ -43,7 +43,7 @@ class LaunchManager {
       urlComponents?.queryItems?.append(queryItemLimit)
       urlComponents?.queryItems?.append(queryLimitOffset)
     case .next:
-      urlComponents?.path = "\(path)/next"
+      urlComponents?.path = "/v3/\(path)/next"
     }
     
     //get url
@@ -72,8 +72,19 @@ class LaunchManager {
       }
       
       do {
-        let launches = try Launch.decoder.decode([Launch].self, from: data)
-        completion(.success(launches))
+        switch launchType {
+        case .next:
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .iso8601
+          let launch = try decoder.decode(Launch.self, from: data)
+          completion(.success([launch]))
+        case .upcoming:
+          let decoder = JSONDecoder()
+          decoder.dateDecodingStrategy = .iso8601
+          let launches = try decoder.decode([Launch].self, from: data)
+          completion(.success(launches))
+        }
+        
       } catch {
         completion(.failure(.serializationError))
       }

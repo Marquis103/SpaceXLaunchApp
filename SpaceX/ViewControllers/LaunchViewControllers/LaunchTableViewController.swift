@@ -25,7 +25,11 @@ class LaunchTableViewController: UITableViewController {
   // MARK: - View Controller Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    //set up tableview
+    self.tableView.rowHeight = 120.0
     self.tableView.tableFooterView = UIView()
+    self.tableView.register(LaunchTableViewCell.self, forCellReuseIdentifier: LaunchTableViewCell.identifier)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -43,15 +47,33 @@ class LaunchTableViewController: UITableViewController {
     viewModel.resultsDidChange = { [weak self] launchType, launches in
       switch launchType {
       case .upcoming:
-        self?.tableView.reloadData()
+        DispatchQueue.main.async {
+          self?.tableView.reloadData()
+        }
       case .next:
         break
       }
     }
   }
   
-  fileprivate func setHeader() {
-    
+  // MARK: - Data Source
+  override func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return viewModel.launches.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: LaunchTableViewCell.identifier, for: indexPath)
+    cell.selectionStyle = .none
+    return cell
+  }
+  
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    let cell = cell as? LaunchTableViewCell
+    cell?.launch = viewModel.launches[indexPath.row]
   }
 }
 
